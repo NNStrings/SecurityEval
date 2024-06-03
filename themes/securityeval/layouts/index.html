@@ -1,0 +1,215 @@
+{{ define "main" }}
+{{ with site.GetPage "homepage" }}
+<!-- Banner -->
+<section class="section-sm">
+  <div class="container">
+    <div class="grid grid-cols-10 lg:gap-14">
+      {{ with .Params.banner }}
+      <div class="text-center items-center col-span-10 lg:col-span-6 md:text-left lg:text-left">
+        <h1 class="mb-4">
+          {{ .title | markdownify }}
+        </h1>
+        <p class="mb-8 leading-8 text-gray-500">
+          {{ .content | markdownify }}
+        </p>
+        {{ with .button }}
+        {{ if .enable }}
+        <a class="btn btn-primary" href="{{ .link | absURL }}">
+          <i class="fa-solid fa-chart-simple pr-2"></i>{{ .label }}
+        </a>
+        {{ end }}
+        {{ end }}
+        {{ with .github }}
+        {{ if .enable }}
+        <a class="btn btn-outline-primary ml-4" href="{{ .link | absURL }}" target="_blank">
+          <i class="fa-brands fa-github pr-2"></i>{{ .label }}
+        </a>
+        {{ end }}
+        {{ end }}
+      </div>
+      {{ end }}
+      {{ with .Params.news }}
+      <div class="col-span-10 lg:col-span-4">
+        <div class="mt-6">
+          <div class="text-base mb-6 text-xl font-semibold text-center lg:text-left lg:text-lg">
+            {{ .title }}
+          </div>
+          {{ with site.GetPage "news" }}
+          <div>
+            <ul class="leading-8">
+              {{ $news := first 5 .Params.news }}
+              {{ range $news }}
+              <li>
+                <a href="{{ .link }}" class="block text-gray-500 hover:text-primary">
+                  <span class="mr-2">{{ .date }}</span>
+                  <span>{{ .title }}</span>
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+          <div class="flex mt-2">
+            <a href="{{ .link }}" class="block hover:underline hover:underline-offset-4 text-gray-500 hover:text-primary">
+              <span>{{ .more }}</span>
+              <span class="fa-solid fa-arrow-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /Banner -->
+
+<!-- Logo -->
+{{ with site.GetPage "sections/logo" }}
+{{ if .Params.enable }}
+<section class="mb-10 lg:mb-20">
+  <div class="container">
+    <div class="row flex justify-center">
+      <div class="w-full">
+        <div class="flex flex-wrap lg:flex-nowrap">
+          {{ range .Params.logo }}
+            <div class="flex mb-5 lg:mb-0 items-center">
+              {{ range .group }}
+                <div class="">
+                  {{ partial "image" (dict "Src" .image "Loading" "eager" "Class" "mx-auto") }}
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+<!-- /Logo -->
+
+<!-- Features -->
+{{ range $i, $e:= .Params.features }}
+  <section class="pt-16 {{ if (modBool $i 2) }}bg-gradient{{ end }}">
+    <div class="container">
+      <div class="row items-center justify-between">
+        <div
+          class="mb:md-0 {{ if not (modBool $i 2) }}
+            md:order-2
+          {{ end }} md:col-5 mb-6">
+          {{ partial "image" (dict "Src" .image "Alt" "feature image") }}
+        </div>
+        <div
+          class="{{ if not (modBool $i 2) }}
+            md:order-1
+          {{ end }} md:col-7 lg:col-6">
+          <h2 class="mb-4">
+            {{ .title | markdownify }}
+          </h2>
+          <p class="mb-8 text-lg">
+            {{ .content | markdownify }}
+          </p>
+          <ul>
+            {{ range .bulletpoints }}
+              <li class="relative mb-4 pl-6 text-gray-500">
+                <i class="fa fa-check absolute left-0 top-1.5 text-green-600"></i>
+                {{ . | markdownify }}
+              </li>
+            {{ end }}
+          </ul>
+          {{ with .button }}
+            {{ if .enable }}
+              <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                {{ .label }}
+                <i class="fa fa-arrow-right pl-2"></i>
+              </a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}
+<!-- /Features -->
+
+<!-- Dataset -->
+{{ with .Params.dataset }}
+<div class="mt-16 mb-20">
+  <div class="container">
+    <h3 class="mb-10 text-center">
+      {{ .title }}
+    </h3>
+    <div class="grid grid-cols-1 gap-4">
+      {{ range site.Taxonomies.categories.ByCount }}
+        <div class="bg-body rounded shadow border border-slate-100 px-6 py-6">
+          <h4 class="text-lg mb-4">{{ .Page.LinkTitle }}</h4>
+          <div class="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {{ range .Pages }}
+            <a href="{{ .RelPermalink }}" class="text-sm hover:text-primary hover:transition duration-150">
+              {{ .LinkTitle }}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+<!-- /Dataset -->
+
+<!-- Model -->
+{{ with .Params.model }}
+<div class="mt-16 mb-16">
+  <div class="container">
+    <h3 class="mb-10 text-center">
+      {{ .title }}
+    </h3>
+    <div class="grid items-stretch grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      {{ range .list }}
+      <a href="{{ .link }}" target="_blank"
+        class="bg-body rounded shadow border border-slate-100 px-6 py-4 hover:border-primary hover:text-primary hover:transition duration-150">
+        <div class="text-sm">
+          {{ .title }}
+        </div>
+      </a>
+      {{ end }}
+
+      <a href="{{ .contact.link }}"
+        class="flex justify-between items-center bg-body rounded shadow border border-slate-100 px-6 py-4 hover:border-primary hover:text-primary hover:transition duration-150">
+        <div class="text-sm">
+          {{ .contact.label }}
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+{{ end }}
+<!-- /Model -->
+
+<!-- Contact -->
+<div class="mt-16 mb-16">
+  <div class="container">
+    <a name="contact"></a>
+    <h3 class="mb-10 text-center">
+      {{ .Params.contact.title }}
+    </h3>
+    <div class="flex justify-center">
+      <div class="lg:col-8 xl:col-7 text-center leading-6 text-gray-500">
+      {{ if eq (string .Site.Language.Lang) (string "zh") }}
+        该模型旨在全面评估大模型，如果对测试结果有疑问或与我们合作，请将您的问题或需求发送至 <a href="zwx3565989732@gmail.com
+        " class="text-primary hover:underline hover:underline-offset-4">zwx3565989732@gmail.com
+      </a> 邮箱。
+      {{ else }}
+      <!-- <div></div> -->
+      {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Contact -->
+
+{{ end }}
+{{ end }}

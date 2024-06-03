@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <section class="mt-12 mb-12">
+    <div class="container">
+      <div class="row justify-center">
+        <article>
+          <div class="mb-6 px-8 py-6 rounded shadow border border-slate-100">
+            <h1 class="h2">
+              {{ .Title }}
+            </h1>
+            <div class="text-md">
+              {{ if isset .Params "website" }}
+                <a href="{{ .Params.website }}" target="_blank" class="mr-4 text-gray-500 hover:text-primary">
+                  <i class="fa-solid fa-up-right-from-square mr-1"></i>{{ i18n "website" }}
+                </a>
+              {{ end }}
+              {{ if isset .Params "github" }}
+                <!-- <a href="{{ .Params.github }}" target="_blank" class="text-gray-500 hover:text-primary">
+                  <i class="fa-brands fa-github mr-1 text-lg"></i>Github
+                </a> -->
+              {{ end }}
+            </div>
+          </div>
+          <div class="content px-8 mb-10">
+            {{ .Content }}
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,22 @@
+<!-- Language List -->
+{{ $class := .Class }}
+{{ $context := .Context }}
+{{ $pageLang := $context.Lang }}
+{{ $base:= urls.Parse site.BaseURL }}
+{{ $siteLanguages := site.Home.AllTranslations }}
+{{ $pageLink := replace (replace $context.RelPermalink (add $pageLang "/") "") $base.Path "/" }}
+
+{{ if $context.IsTranslated }}
+  <!-- <ul class="flex items-center mr-6">
+    {{ range $index, $item := $siteLanguages }}
+        <li class="mr-1">
+          <a class="text-sm {{ if ne (string $pageLang) (string .Language) }}text-gray-400{{ end }}" href="{{ replace (add .RelPermalink $pageLink) `//` `/` }}">
+            {{ .Language.LanguageName }}
+          </a>
+        </li>
+        {{ if eq (string .Language.LanguageCode) (string "zh") }}
+        <li class="mr-1 text-sm text-gray-400">|</li>
+        {{ end }}
+    {{ end }}
+  </ul> -->
+{{ end }}

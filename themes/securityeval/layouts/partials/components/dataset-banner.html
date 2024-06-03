@@ -1,0 +1,13 @@
+{{ with site.GetPage "sections/dataset-banner" }}
+<div class="p-8 sm:p-10 rounded shadow border border-slate-100">
+  <h2 class="mb-3">
+    {{ .Params.title }}
+  </h2>
+  <h4 class="mb-6">
+    {{ .Params.subtitle }}
+  </h4>
+  <p class="leading-8 text-gray-500">
+    {{ .Params.description }}
+  </p>
+</div>
+{{ end }}

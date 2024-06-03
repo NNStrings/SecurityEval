@@ -1,0 +1,201 @@
+{{ define "main" }}
+  <section class="section-sm" id="evaluationApp" v-cloak>
+    <div class="container">
+      <div v-if="successed" class="row">
+        <div class="flex mt-40 justify-center items-center">
+          <i class="fa-solid fa-check text-2xl mr-4 text-green-600"></i>
+          <span class="text-lg ml4">
+            ${successMsg}
+          </span>
+        </div>
+      </div>
+      <div v-else class="row">
+        <div class="md:col-10 lg:col-6 mx-auto">
+          <div class="mb-6 flex">
+            <div class="flex mb-4 w-full cursor-pointer gap-4">
+              <div
+                class="grow flex p-4 rounded shadow border border-slate-100"
+                :class="{
+                  'text-primary': type === 'api',
+                  'border-primary': type === 'api'
+                }"
+                @click="typeChange('api')"
+              >
+                <i class="fa-regular fa-circle-check text-xl" :class="{ 'text-gray-300': type !== 'api' }"></i>
+                <div class="ml-4 xl:w-48">
+                  <div class="text-xl">
+                    {{ i18n "api_type_name" }}
+                  </div>
+                  <!-- <div class="text-sm hidden lg:flex">
+                    {{ i18n "api_type_desc" }}
+                  </div> -->
+                </div>
+              </div>
+              <div
+                class="grow flex p-4 rounded shadow border border-slate-100"
+                :class="{
+                  'text-primary': type === 'module',
+                  'border-primary': type === 'module'
+                }"
+                @click="typeChange('module')"
+              >
+                <i class="fa-regular fa-circle-check text-xl" :class="{ 'text-gray-300': type !== 'module' }"></i>
+                <div class="ml-4 xl:w-48">
+                  <div class="text-xl">
+                    {{ i18n "model_type_name" }}
+                  </div>
+                  <!-- <div class="text-sm hidden lg:flex">
+                    {{ i18n "model_type_desc" }}
+                  </div> -->
+                </div>
+              </div>
+              <input type="hidden" name="type" :value="type" />
+            </div>
+          </div>
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              {{ i18n "model_name" }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="modelName"
+              class="form-input"
+              placeholder="{{ i18n "model_placeholder" }}"
+              name="model"
+              type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              {{ i18n "team_name" }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="teamName"
+              class="form-input"
+              placeholder="{{ i18n "team_placeholder" }}"
+              name="team"
+              type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              {{ i18n "parameter_name" }}
+            </label>
+            <input
+              v-model="parameter"
+              class="form-input"
+              placeholder="{{ i18n "parameter_placeholder" }}"
+              name="parameter"
+              type="text" />
+          </div>
+          <div class="mb-6" v-if="type === 'api'">
+            <label for="name" class="form-label">
+              {{ i18n "api_endpoint_name" }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="apiEndpoint"
+              class="form-input"
+              placeholder="{{ i18n "api_endpoint_placeholder" }}"
+              name="api_endpoint"
+              type="text" />
+          </div>
+          <div class="mb-6" v-if="type === 'module'">
+            <label for="name" class="form-label">
+              {{ i18n "repository_url_name" }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="repositoryUrl"
+              class="form-input"
+              placeholder="{{ i18n "repository_url_placeholder" }}"
+              name="repository_url"
+              type="text" />
+          </div>
+          <div class="mb-6" v-if="type === 'api'">
+            <label for="name" class="form-label">
+              {{ i18n "api_doc_name" }}
+            </label>
+            <input
+              v-model="apiDoc"
+              class="form-input"
+              placeholder="{{ i18n "api_doc_placeholder" }}"
+              name="api_doc"
+              type="text" />
+          </div>
+          <div class="mb-6" v-if="type === 'api'">
+            <label for="name" class="form-label">
+              {{ i18n "website_url_name" }}
+            </label>
+            <input
+              v-model="websiteUrl"
+              class="form-input"
+              placeholder="{{ i18n "website_url_placeholder" }}"
+              name="website_url"
+              type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="message" class="form-label">
+              {{ i18n "model_desc" }}
+            </label>
+            <textarea
+              v-model="modelDesc"
+              id="message"
+              name="model_desc"
+              class="form-input"
+              placeholder="{{ i18n "model_desc_placeholder" }}"
+              rows="3"></textarea>
+          </div>
+
+          <div class="mb-6">
+            <label for="email" class="form-label">
+              {{ i18n "email_name" }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="email"
+              class="form-input"
+              placeholder="{{ i18n "email_placeholder" }}"
+              name="email"
+              type="email" />
+          </div>
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              {{ i18n "phone_name" }}
+            </label>
+            <input
+              v-model="phone"
+              class="form-input"
+              placeholder="{{ i18n "phone_placeholder" }}"
+              name="phone"
+              type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              {{ i18n "result_publish_name" }}
+            </label>
+            <ul class="flex">
+              <li
+                class="mr-5 cursor-pointer"
+                @click="resultPublishTypeChange('public')"
+              >
+                <i
+                  class="fa-regular fa-circle-dot pr-2"
+                  :class="resultPublishType === 'public' ? 'text-primary' : 'text-gray-300'"
+                ></i>{{ i18n "result_publish" }}
+              </li>
+              <li
+                class="mr-5 cursor-pointer"
+                @click="resultPublishTypeChange('private')"
+              >
+                <i
+                  class="fa-regular fa-circle-dot pr-2"
+                  :class="resultPublishType === 'private' ? 'text-primary' : 'text-gray-300'"
+                ></i>{{ i18n "result_private" }}
+              </li>
+            </ul>
+          </div>
+          <div class="mb-6 text-red-600" v-if="errorMsg">
+            <i class="fa-solid fa-circle-exclamation mr-2"></i>${errorMsg}
+          </div>
+          
+          <button type="submit" class="btn btn-primary" @click="submit">{{ i18n "submit_button_name" }}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

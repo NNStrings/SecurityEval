@@ -1,0 +1,81 @@
+{{ $currentPage := . }}
+{{ range site.Menus.main }}
+  {{ $menuURL := .URL | absLangURL }}
+  {{ $pageURL:= $currentPage.Permalink | absLangURL }}
+  {{ $active := and (eq $menuURL $pageURL) (not (or (eq .Name "联系我们") (eq .Name "Contact"))) }}
+  {{ if .HasChildren }}
+    <li class="nav-item nav-dropdown group relative">
+      <span
+        class="nav-link {{ range .Children }}
+          {{ $childURL := .URL | absLangURL }}
+          {{ $active := eq $childURL $pageURL }}
+          {{ if $active }}active{{ end }}
+        {{ end }} inline-flex items-center">
+        {{ .Name }}
+        <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+          <path
+            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </span>
+      <ul
+        class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100">
+        {{ range .Children }}
+          {{ $childURL := .URL | absLangURL }}
+          {{ $active := eq $childURL $pageURL }}
+          <li class="nav-dropdown-item">
+            <a
+              class="nav-dropdown-link {{ if $active }}
+                active
+              {{- end -}}"
+              {{ if findRE `^http` .URL }}
+                target="_blank" rel="noopener"
+              {{ end }}
+              href="{{- if findRE `^#` .URL -}}
+                {{- if not $.IsHome -}}
+                  {{- site.BaseURL | relLangURL -}}
+                {{- end }}
+                {{- .URL -}}
+              {{- else -}}
+                {{- .URL | relLangURL -}}
+              {{- end -}}">
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </li>
+  {{ else }}
+    <li class="nav-item {{ if $active }}active{{- end -}}">
+      <a
+        class="nav-link"
+        {{ if findRE `^http` .URL }}
+          target="_blank" rel="noopener"
+        {{ end }}
+        href="{{- if findRE `^#` .URL -}}
+          {{- if not $.IsHome -}}
+            {{- site.BaseURL | relLangURL -}}
+          {{- end }}{{- .URL -}}
+        {{- else -}}
+          {{- .URL | relLangURL -}}
+        {{- end -}}"
+        >{{ .Name }}</a
+      >
+    </li>
+  {{ end }}
+{{ end }}
+{{ if site.Params.navigation_button.enable }}
+  <li class="mt-4 inline-block lg:hidden">
+    <a
+      class="btn btn-outline-primary btn-sm"
+      href="{{ site.Params.navigation_button.link | relLangURL }}">
+      {{ i18n "navigation_button_label" }}
+    </a>
+  </li>
+{{ end }}
+{{ if site.Params.github.enable }}
+  <li class="mt-6 text-lg lg:hidden">
+    <a href="{{ site.Params.github.link }}" target="_blank">
+      <i class="fa-brands fa-github"></i> Github
+    </a>
+  </li>
+{{ end }}

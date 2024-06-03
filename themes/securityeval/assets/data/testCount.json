@@ -1,0 +1,21 @@
+{
+  "AGIEval":1938,
+  "BBH":250,
+  "GAOKAO-BENCH":425,
+  "GSM8K":1319,
+  "MathQA":2985,
+  "ape210k":5000,
+  "arith_std":3000,
+  "asdiv-a":122,
+  "cmmlu":499,
+  "dolphin1878":187,
+  "math":5000,
+  "math23k":2317,
+  "math401":393,
+  "mawps":234,
+  "mmlu":847,
+  "scq_ch":1960,
+  "scq_en":1878,
+  "svamp":1000,
+  "gaokao-2023": 159
+}

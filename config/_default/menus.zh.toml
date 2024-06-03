@@ -1,0 +1,22 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "首页"
+url = "/"
+weight = 1
+
+[[main]]
+name = "测评榜单"
+url = "leaderboard/"
+weight = 3
+
+[[main]]
+name = "测评数据集"
+url = "dataset/"
+weight = 4
+
+[[main]]
+name = "联系我们"
+url = "/#contact"
+weight = 6

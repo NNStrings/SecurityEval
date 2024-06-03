@@ -1,0 +1,146 @@
+- id: home
+  translation: Home
+
+- id: read_more
+  translation: Read More
+
+- id: send
+  translation: Send
+
+- id: related_posts
+  translation: Related Posts
+
+- id: categories
+  translation: Categories
+
+- id: tags
+  translation: Tags
+
+- id: toc
+  translation: Table of Contents
+
+- id: share
+  translation: Share
+
+- id: search_input_placeholder
+  translation: Search Post ...
+
+- id: no_results_for
+  translation: No results for
+
+- id: empty_search_results_placeholder
+  translation: Type something to search..
+
+- id: website
+  translation: 官网
+
+- id: dataset_categories
+  translation: 能力维度
+
+- id: navigation_button_label
+  translation: 申请测评
+
+- id: leaderboard_name
+  translation: 模型
+
+- id: leaderboard_date
+  translation: 测评日期
+
+- id: leaderboard_params
+  translation: 参数量
+
+- id: leaderboard_average
+  translation: 综合评分
+
+- id: leaderboard_arithmetics
+  translation: 算术(平均分)
+
+- id: leaderboard_math_world_problems
+  translation: 应用题(平均分)
+
+- id: api_type_name
+  translation: API提交
+
+- id: api_type_desc
+  translation: 将模型能力封装为 HTTP 接口，并提供相应的 API 文档
+
+- id: model_type_name
+  translation: 模型仓库提交
+
+- id: model_type_desc
+  translation: 提供开源的模型仓库及用户文档，如 GitHub，Hugginface Model Repo
+
+- id: model_name
+  translation: 模型名称
+
+- id: model_placeholder
+  translation: 请输入模型名称
+
+- id: team_name
+  translation: 组织/团队名称
+
+- id: team_placeholder
+  translation: 请输入组织/团队名称
+
+- id: parameter_name
+  translation: 参数量（单位：十亿）
+
+- id: parameter_placeholder
+  translation: 请输入参数量
+
+- id: api_endpoint_name
+  translation: 模型API Endpoint
+
+- id: api_endpoint_placeholder
+  translation: 请输入模型API Endpoint
+
+- id: api_doc_name
+  translation: 模型API文档
+
+- id: api_doc_placeholder
+  translation: 请输入文档链接
+
+- id: website_url_name
+  translation: Github/官网
+
+- id: website_url_placeholder
+  translation: 请输入Github/官网地址
+
+- id: repository_url_name
+  translation: 模型仓库地址
+
+- id: repository_url_placeholder
+  translation: 请输入模型仓库地址
+
+- id: model_desc
+  translation: 模型描述
+
+- id: model_desc_placeholder
+  translation: 请输入模型描述
+
+- id: email_name
+  translation: 邮箱
+
+- id: email_placeholder
+  translation: 请输入邮箱
+
+- id: phone_name
+  translation: 电话
+
+- id: phone_placeholder
+  translation: 请输入电话号码
+
+- id: result_publish_name
+  translation: 测评结果是否公开
+
+- id: result_publish
+  translation: 公开
+
+- id: result_private
+  translation: 不公开
+
+- id: submit_button_name
+  translation: 提交申请
+
+- id: all
+  translation: 全部

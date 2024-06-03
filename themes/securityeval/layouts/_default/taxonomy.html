@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <section class="mt-12 mb-12">
+    <div class="container">
+      <div class="mb-12">
+        {{ partial "components/dataset-banner.html" . }}
+      </div>
+      <div class="row">
+        <!-- sidebar -->
+        <div class="lg:col-2">
+          <!-- categories -->
+          {{ partial "components/categories" . }}
+        </div>
+        <!-- blog posts -->
+        <div class="lg:col-10">
+          <div class="row">
+            <div class="grid items-stretch grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {{ range .Data.Pages }}
+                {{ partial "components/common-card" . }}
+            {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

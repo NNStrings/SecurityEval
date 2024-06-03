@@ -1,0 +1,31 @@
+<script src="/libs/vue.min.js"></script>
+<script src="/libs/xe-utils.min.js"></script>
+<script src="/libs/vex-table.min.js"></script>
+
+<!-- JS Plugins + Main script -->
+{{ $scripts := slice }}
+
+<!-- main script -->
+{{ $scripts = $scripts | append (resources.Get "js/main.js" | js.Build) }}
+{{ $scripts = $scripts | append (resources.Get "js/leaderboard.js" | js.Build) }}
+{{ $scripts = $scripts | append (resources.Get "js/evaluation.js" | js.Build) }}
+{{ $scripts = $scripts | resources.Concat "js/script.js" }}
+{{ if hugo.IsProduction }}
+  {{ $scripts = $scripts | minify | fingerprint }}
+{{ end }}
+
+<script
+  crossorigin="anonymous"
+  integrity="{{ $scripts.Data.Integrity }}"
+  src="{{ $scripts.RelPermalink }}"></script>
+
+<!-- progressive web app -->
+{{ partialCached "pwa.html" . }}
+
+
+<!-- cookie consent -->
+{{ partialCached "cookie-consent.html" . }}
+
+
+<!-- google adsense -->
+{{ partialCached "adsense-script.html" . }}

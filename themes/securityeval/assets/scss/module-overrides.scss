@@ -1,0 +1,137 @@
+// table of contents
+.table-of-content {
+  @apply overflow-hidden rounded;
+}
+
+// share icons
+.share-icons {
+  .share-link {
+    @apply h-9 w-9 rounded leading-9;
+    @apply bg-primary hover:bg-primary dark:bg-darkmode-primary dark:hover:bg-darkmode-primary;
+  }
+  .share-icon svg {
+    @apply dark:fill-dark;
+  }
+}
+
+// tab
+.tab {
+  @apply border-border dark:border-darkmode-border overflow-hidden rounded-lg border;
+  &-nav {
+    @apply border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light pl-4;
+
+    &-item {
+      @apply text-dark dark:text-darkmode-dark px-8 text-lg #{!important};
+      &.active {
+        @apply border-dark dark:border-darkmode-primary;
+      }
+    }
+  }
+  &-content {
+    &-panel {
+      @apply px-4 pt-0 #{!important};
+    }
+  }
+}
+
+// accordion
+.accordion {
+  @apply border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light mb-6 overflow-hidden rounded-lg border;
+  &-header {
+    @apply text-dark dark:text-darkmode-dark;
+  }
+}
+
+// cookie consent
+.cookie-box {
+  @apply rounded-lg #{!important};
+}
+
+// search
+.search-wrapper {
+  .search-wrapper-content {
+    @apply dark:bg-darkmode-body;
+  }
+  input {
+    @apply dark:bg-darkmode-theme-light dark:text-darkmode-text dark:border-darkmode-border dark:focus:border-darkmode-primary focus:ring-0;
+  }
+  kbd {
+    @apply dark:bg-darkmode-theme-light;
+  }
+  .search-wrapper-body {
+    @apply dark:bg-darkmode-theme-light dark:shadow-none;
+  }
+  &.search-page {
+    .search-wrapper-body {
+      @apply dark:bg-transparent;
+    }
+  }
+  .search-result-info em {
+    @apply dark:text-white;
+  }
+  .search-result-item {
+    @apply dark:bg-darkmode-body dark:border-darkmode-border p-4;
+    .search-title {
+      @apply dark:text-darkmode-dark;
+    }
+    u {
+      @apply dark:text-darkmode-primary;
+    }
+    &:focus,
+    &.search-item-selected,
+    &:hover {
+      @apply dark:bg-darkmode-primary/10;
+    }
+  }
+}
+
+// dataset menu toggler
+input#dataset-menu-toggle:checked + div label #show-button {
+  @apply hidden;
+}
+
+input#dataset-menu-toggle:checked + div label #hide-button {
+  @apply block;
+}
+
+input#dataset-menu-toggle:checked ~ #dataset-menu {
+  @apply block;
+}
+
+.item-sample {
+  .tooltip {
+    display: none;
+
+    .tooltip-wrapper {
+      position: relative;
+    }
+    .tooltip-wrapper::after, .tooltip-wrapper::before {
+      position: absolute;
+      top: 100%;
+      left: calc(4% + 15px);
+      border: solid transparent;
+      content: "";
+      height: 0;
+      width: 0;
+      pointer-events: none;
+    }
+    
+    .tooltip-wrapper::after {
+      border-color: transparent;
+      border-top-color: rgba(0, 0, 0, 0.8);
+      border-width: 6px;
+      margin-left: -6px;
+    }
+    .tooltip-wrapper::before {
+      border-color: transparent;
+      border-width: 7px;
+      margin-left: -7px;
+    }
+
+  }
+  &:hover {
+    .tooltip {
+      display: block;
+    }
+  }
+}

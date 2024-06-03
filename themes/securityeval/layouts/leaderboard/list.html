@@ -1,0 +1,68 @@
+{{ define "main" }}
+  <section class="mt-[20px] mb-[20px]">
+    <div class="container">
+      <div id="leaderboardApp" v-cloak>
+        <div id="filterWrapper" class="overflow-hidden">
+          <div class="md:flex md:justify-between items-center mb-4">
+            <h1 class="h4">
+              {{ .Title }}
+            </h1>
+            <div class="text-sm text-gray-500 mt-2 md:mt-0">
+              {{ if eq (string .Site.Language.Lang) (string "zh") }}
+                <!-- <div></div> -->
+              {{ else }}
+                <!-- <div></div> -->
+              {{ end }}
+            </div>
+          </div>
+        </div>
+
+        <div v-if="isEmpty" class="pt-[80px] pb-[200px] text-center">
+          <div class="flex justify-center mb-4">
+            {{ partial "image" (dict "Src" "/images/nodata.svg" "Alt" "empty" "Loading" "eager" "Class" "w-[120px]") }}
+          </div>
+          {{ .Params.nodata }}
+        </div>
+        <div v-show="!isEmpty" id="tableWrapper">
+          <vxe-table
+            class="leaderboard-table rounded overflow-hidden"
+            border="inner"
+            show-overflow
+            height="auto"
+            :data="tableData"
+            :row-config="{ isHover: true }"
+            :sort-config="sortConfig"
+            @header-cell-click="headerCellClickEvent"
+            ref="Table"
+          >
+            <vxe-column type="seq" title=" " width="60" :fixed="fixedColumn" align="center"></vxe-column>
+            <vxe-column field="name" title="{{ i18n "leaderboard_name" }}" width="180" :fixed="fixedColumn" :formatter="formatterName"></vxe-column>
+            <vxe-column field="date" title="{{ i18n "leaderboard_date" }}" width="100" align="center"></vxe-column>
+            <!-- <vxe-column field="params" title="{{ i18n "leaderboard_params" }}" width="100" align="center"></vxe-column> -->
+            <vxe-table-column v-for="(config, index) in averageColumn" :key="index" v-bind="config">
+              <template v-slot:header="{ column }">
+                <div class="inline-block cursor-pointer select-none">
+                  <span>${ column.title }</span>
+                  <span class="custom-sort text-xs" :class="column.order ? 'text-primary' : 'text-gray-400'">
+                    <i class="fa-solid w-[20px]" :class="column.order ? (column.order === 'desc' ? 'fa-arrow-down-wide-short' : 'fa-arrow-up-short-wide') : 'fa-arrow-down-long'"></i>
+                  </span>
+                </div>
+              </template> 
+            </vxe-table-column>
+            
+            <vxe-table-column v-for="(config, index) in datasetColumn" :key="index" v-bind="config" :formatter="formatterNum">
+              <template v-slot:header="{ column }">
+                <div class="inline-block cursor-pointer select-none">
+                  <span>${ column.title }</span>
+                  <span class="custom-sort text-xs" :class="column.order ? 'text-primary' : 'text-gray-400'">
+                    <i class="fa-solid w-[20px]" :class="column.order ? (column.order === 'desc' ? 'fa-arrow-down-wide-short' : 'fa-arrow-up-short-wide') : 'fa-arrow-down-long'"></i>
+                  </span>
+                </div>
+              </template> 
+            </vxe-table-column>
+          </vxe-table>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

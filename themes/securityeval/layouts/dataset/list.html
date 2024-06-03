@@ -1,0 +1,32 @@
+{{ define "main" }}
+  <section class="mt-12 mb-12">
+    <div class="container">
+      <div class="mb-12">
+        {{ partial "components/dataset-banner.html" . }}
+      </div>
+      <div class="row">
+        <!-- sidebar -->
+        <div class="lg:col-2">
+          <!-- categories -->
+          {{ partial "components/categories" . }}
+        </div>
+
+        <!-- blog posts -->
+        <div class="lg:col-10">
+          <div class="row">
+            {{ $paginator:= .Paginate .RegularPages }}
+            <div class="grid items-stretch grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {{ range $paginator.Pages }}
+              <!-- <div class="md:col-6 lg:col-4 mb-8"> -->
+                {{ partial "components/common-card" . }}
+              <!-- </div> -->
+            {{ end }}
+          </div>
+          </div>
+          {{ partial "components/pagination.html" . }}
+        </div>
+        
+      </div>
+    </div>
+  </section>
+{{ end }}
