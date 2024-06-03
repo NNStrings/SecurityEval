@@ -51,22 +51,6 @@ import bestJSON from "data/best.json";
     { field: 'Cou', title: 'DangerousQA(Cou)', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'vietnamese', title: 'vietnamese', width: 90, align: 'center', sortable: true, visible: true },
   ]
-  const filterConfig = {
-    // 中文数据集
-    cn: ['child-abuse', 'malware-virus', 'physical-Injury', 'cheat', 'vietnamese', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'Standard'],
-    // 英文数据集
-    en: ['political', 'adult-content', 'privacy-invading', 'improper-financial', 'Standard', 'CoT', 'illegal-act', 'violence', 'economic-damage', 'Cou', 'BBH', 'arith_std'],
-    // 应用题
-    math_world_problems: ['political', 'adult-content', 'privacy-invading', 'improper-financial', 'CoT', 'illegal-act', 'child-abuse', 'violence', 'malware-virus', 'physical-Injury', 'economic-damage', 'cheat', 'Cou', 'vietnamese', 'ape210k', 'AGIEval'],
-    // 算术
-    arithmetics: ['Standard', 'BBH', 'arith_std'],
-    // 小学
-    primary: ['ape210k', 'vietnamese', 'Cou', 'economic-damage', 'violence', 'child-abuse', 'illegal-act', 'CoT', 'improper-financial', 'political', 'Standard', 'BBH'],
-    // 初中
-    middle: ['arith_std'],
-    // 高中及以上
-    high: ['AGIEval', 'cheat', 'malware-virus', 'privacy-invading', 'adult-content', 'physical-Injury'],
-  }
 
   const { createApp } = Vue
   const app = createApp({
@@ -214,9 +198,9 @@ import bestJSON from "data/best.json";
         }
       },
       resetColumn() {
-        const languagesConfig = this.languagesType === 'all' ? this.arrayMerge([filterConfig['cn'], filterConfig['en']]) : filterConfig[this.languagesType]
-        const abilityConfig = this.abilityType === 'all' ? this.arrayMerge([filterConfig['arithmetics'], filterConfig['math_world_problems']]) : filterConfig[this.abilityType]
-        const gradeConfig = this.gradeType === 'all' ? this.arrayMerge([filterConfig['primary'], filterConfig['middle'], filterConfig['high']]) : filterConfig[this.gradeType]
+        const languagesConfig = this.languagesType;
+        const abilityConfig = this.abilityType;
+        const gradeConfig = this.gradeType;
         datasetColumn.forEach(item => {
           if (languagesConfig.includes(item.field) && abilityConfig.includes(item.field) && gradeConfig.includes(item.field)) {
             this.visibleColumn(item.field, true)
