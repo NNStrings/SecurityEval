@@ -56,41 +56,37 @@ import testCountData from "data/testCount.json";
     // { field: 'cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: langType === 'zh' ? 120 : 180, formatter: formatterRank, align: 'center', sortable: true, visible: true },
   ]
   const datasetColumn = [
-    { field: 'scq_en', title: '非法活动', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'scq_ch', title: '虐待儿童', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'mawps', title: '暴力', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'GAOKAO-BENCH', title: '恶意软件病毒', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'gaokao-2023', title: '身体伤害', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'asdiv-a', title: '经济损害', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'cmmlu', title: '欺诈/诈骗', width: 130, align: 'center', sortable: true, visible: true },
-    { field: 'math', title: '成人内容', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'GSM8K', title: '政治宣传', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'mmlu', title: '隐私侵犯活动', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'svamp', title: '不当金融行为', width: 80, align: 'center', sortable: true, visible: true },
-    { field: 'math401', title: 'DangerousQA (Standard)', width: 120, align: 'center', sortable: true, visible: true },
-    { field: 'dolphin1878', title: 'DangerousQA(CoT)', width: 110, align: 'center', sortable: true, visible: true },
-    { field: 'MathQA', title: 'DangerousQA(Cou)', width: 90, align: 'center', sortable: true, visible: true },
-    { field: 'math23k', title: 'vietnamese', width: 90, align: 'center', sortable: true, visible: true },
-    // { field: 'ape210k', title: 'Ape210K', width: 90, align: 'center', sortable: true, visible: true },
-    // { field: 'BBH', title: 'Big-Bench-Hard(Math)', width: 180, align: 'center', sortable: true, visible: true },
-    // { field: 'AGIEval', title: 'AGIEval', width: 90, align: 'center', sortable: true, visible: true },
-    // { field: 'arith_std', title: 'Arith3K', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'illegal-act', title: '非法活动', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'child-abuse', title: '虐待儿童', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'violence', title: '暴力', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'malware-virus', title: '恶意软件病毒', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'physical-Injury', title: '身体伤害', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'economic-damage', title: '经济损害', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'cheat', title: '欺诈/诈骗', width: 130, align: 'center', sortable: true, visible: true },
+    { field: 'adult-content', title: '成人内容', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'political', title: '政治宣传', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'privacy-invading', title: '隐私侵犯活动', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'improper-financial', title: '不当金融行为', width: 80, align: 'center', sortable: true, visible: true },
+    { field: 'Standard', title: 'DangerousQA (Standard)', width: 120, align: 'center', sortable: true, visible: true },
+    { field: 'CoT', title: 'DangerousQA(CoT)', width: 110, align: 'center', sortable: true, visible: true },
+    { field: 'Cou', title: 'DangerousQA(Cou)', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'vietnamese', title: 'vietnamese', width: 90, align: 'center', sortable: true, visible: true },
   ]
   const filterConfig = {
     // 中文数据集
-    cn: ['scq_ch', 'GAOKAO-BENCH', 'gaokao-2023', 'cmmlu', 'math23k', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'math401'],
+    cn: ['child-abuse', 'malware-virus', 'physical-Injury', 'cheat', 'vietnamese', 'ape210k', 'BBH', 'AGIEval', 'arith_std', 'Standard'],
     // 英文数据集
-    en: ['GSM8K', 'math', 'mmlu', 'svamp', 'math401', 'dolphin1878', 'scq_en', 'mawps', 'asdiv-a', 'MathQA', 'BBH', 'arith_std'],
+    en: ['political', 'adult-content', 'privacy-invading', 'improper-financial', 'Standard', 'CoT', 'illegal-act', 'violence', 'economic-damage', 'Cou', 'BBH', 'arith_std'],
     // 应用题
-    math_world_problems: ['GSM8K', 'math', 'mmlu', 'svamp', 'dolphin1878', 'scq_en', 'scq_ch', 'mawps', 'GAOKAO-BENCH', 'gaokao-2023', 'asdiv-a', 'cmmlu', 'MathQA', 'math23k', 'ape210k', 'AGIEval'],
+    math_world_problems: ['political', 'adult-content', 'privacy-invading', 'improper-financial', 'CoT', 'illegal-act', 'child-abuse', 'violence', 'malware-virus', 'physical-Injury', 'economic-damage', 'cheat', 'Cou', 'vietnamese', 'ape210k', 'AGIEval'],
     // 算术
-    arithmetics: ['math401', 'BBH', 'arith_std'],
+    arithmetics: ['Standard', 'BBH', 'arith_std'],
     // 小学
-    primary: ['ape210k', 'math23k', 'MathQA', 'asdiv-a', 'mawps', 'scq_ch', 'scq_en', 'dolphin1878', 'svamp', 'GSM8K', 'math401', 'BBH'],
+    primary: ['ape210k', 'vietnamese', 'Cou', 'economic-damage', 'violence', 'child-abuse', 'illegal-act', 'CoT', 'improper-financial', 'political', 'Standard', 'BBH'],
     // 初中
     middle: ['arith_std'],
     // 高中及以上
-    high: ['AGIEval', 'cmmlu', 'GAOKAO-BENCH', 'mmlu', 'math', 'gaokao-2023'],
+    high: ['AGIEval', 'cheat', 'malware-virus', 'privacy-invading', 'adult-content', 'physical-Injury'],
   }
 
   const { createApp } = Vue
@@ -98,11 +94,11 @@ import testCountData from "data/testCount.json";
     data() {
       return {
         fixedColumn: document.body.offsetWidth > 640 ? 'left' : '',
-        sampleType: 'best', // best | zero | few
-        languagesType: 'all', // all | cn | en
-        abilityType: 'all', // all | arithmetics | math_world_problems
-        gradeType: 'all', // all | primary | middle | high | college
-        quickViewType: '', // 数据集速览
+        sampleType: 'best',
+        languagesType: 'all',
+        abilityType: 'all',
+        gradeType: 'all',
+        quickViewType: '',
         averageColumn,
         datasetColumn,
         tableData: this.tableDataFilter(bestData),
@@ -275,22 +271,6 @@ import testCountData from "data/testCount.json";
           const sortType = sortList[0].order;
           const sortFieldData = isNaN(Number(a[sortField])) ? 0 : Number(a[sortField]);
           const sortFieldData2 = isNaN(Number(b[sortField])) ? 0 : Number(b[sortField]);
-          // 累加排位, 数字越小越靠前
-          // if (sortField.includes('cumulative_ranking')) {
-          //   if (sortType === 'desc') {
-          //     return sortFieldData - sortFieldData2;
-          //   }
-          //   if (sortType === 'asc') {
-          //     return sortFieldData2 - sortFieldData;
-          //   }
-          // } else {
-          //   if (sortType === 'asc') {
-          //     return sortFieldData - sortFieldData2;
-          //   }
-          //   if (sortType === 'desc') {
-          //     return sortFieldData2 - sortFieldData;
-          //   }
-          // }
           if (sortType === 'asc') {
             return sortFieldData - sortFieldData2;
           }
@@ -384,7 +364,7 @@ import testCountData from "data/testCount.json";
           let count = 0;
           try {
             datasetColumns.forEach((column) => {
-              if (column.field === "math401") throw Error();
+              if (column.field === "Standard") throw Error();
               count += item[column.field] * 10000
             })
           }
