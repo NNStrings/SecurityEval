@@ -107,15 +107,6 @@ import bestJSON from "data/best.json";
       },
       sampleTypeChange(type) {
         this.sampleType = type;
-        if (type === 'best') {
-          this.tableData = this.tableDataFilter(bestData);
-        }
-        if (type === 'zero') {
-          this.tableData = this.tableDataFilter(zeroShotData);
-        }
-        if (type === 'few') {
-          this.tableData = this.tableDataFilter(fewShotData);
-        }
         this.delayResetColumn()
       },
       languagesTypeChange(type) {
@@ -248,7 +239,7 @@ import bestJSON from "data/best.json";
       formatterRank: formatterRank,
 
       tableDataFilter(data) {
-        const ignoreList = ['mathgpt-0206'];
+        const ignoreList = [];
         return data.filter(item => !ignoreList.includes(item.name));
       },
 
