@@ -1,7 +1,4 @@
 import bestJSON from "data/best.json";
-// import zeroShotJSON from "data/zero.json";
-// import fewShotJSON from "data/few.json";
-import testCountData from "data/testCount.json";
 
 (function () {
   "use strict";
@@ -10,39 +7,24 @@ import testCountData from "data/testCount.json";
     return data.map((item) => {
       return {
         ...item,
-        'ability_average': 0,
         'overall_average': 0,
-        'weighted_average': 0,
-        // 'cumulative_ranking': 0,
       }
     })
   }
 
   const bestData = initTableData(bestJSON);
-  // const zeroShotData = initTableData(zeroShotJSON);
-  // const fewShotData = initTableData(fewShotJSON);
 
   const leaderboardApp = document.getElementById("leaderboardApp");
   if (!leaderboardApp) return;
 
   const langType = /\/en/.test(new URL(window.location.href).pathname) ? 'en' : 'zh';
 
-  const abilityAverageName = langType === 'zh' ? '能力平均' : 'Ability average';
   const overallAverageName = langType === 'zh' ? '整体平均' : 'Overall average';
-  const weightedAverageName = langType === 'zh' ? '加权平均' : 'Weighted average';
-  // const cumulativeRankingName = langType === 'zh' ? '累加排位' : 'Cumulative ranking';
-  const abilityAverageTips = {
-    content: langType === 'zh' ? '分别计算模型在应用题和算数类型各个数据集上的平均准确率，然后取两者的平均值作为最终能力平均准确率。当只选择应用题或算术能力维度的时候，能力平均取算数平均值作为能力平均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on various datasets of application problems and arithmetic types respectively, and then take the average of the two as the final average accuracy of ability. When opting for either the math word problem or arithmetic dimension, the mean of the scores is calculated as the proficiency average. The larger this value, the better the performance of the model.'
-  }
+
   const overallAverageTips = {
     content: langType === 'zh' ? '将该模型在n个数据集上的准确率直接算均值。该数值越大代表模型性能越好。' : 'Calculate the average accuracy of the model on n datasets directly. A higher value indicates better model performance.'
   }
-  const weightedAverageTips = {
-    content: langType === 'zh' ? '用该模型在n个数据集上所有做对题目数除以所有数据集的总题目数。该数值越大代表模型性能越好。' : 'The number of correct questions of the model on n datasets is divided by the total number of questions in all datasets. The larger this value, the better the performance of the model.'
-  }
-  // const cumulativeRankingTips = {
-  //   content: langType === 'zh' ? '将该模型在n个数据集上的准确率排名的排序名次累加。该数值越小代表模型性能越好。' : "Add up the ranking positions of the model's accuracy on n datasets. A lower value indicates better model performance."
-  // }
+
   const formatterNum = function ({ cellValue }) {
     return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue).toFixed(4);
   }
@@ -50,10 +32,7 @@ import testCountData from "data/testCount.json";
     return isNaN(Number(cellValue)) ? 'N/A' : Number(cellValue);
   }
   const averageColumn = [
-    // { field: 'ability_average', title: abilityAverageName, 'title-help': abilityAverageTips, width: langType === 'zh' ? 120 : 160, formatter: formatterNum, align: 'center', sortable: true, visible: true },
     { field: 'overall_average', title: overallAverageName, 'title-help': overallAverageTips, width: langType === 'zh' ? 120 : 160, formatter: formatterNum, align: 'center', sortable: true, visible: true },
-    // { field: 'weighted_average', title: weightedAverageName, 'title-help': weightedAverageTips, width: langType === 'zh' ? 120 : 180, formatter: formatterNum, align: 'center', sortable: true, visible: true },
-    // { field: 'cumulative_ranking', title: cumulativeRankingName, 'title-help': cumulativeRankingTips, width: langType === 'zh' ? 120 : 180, formatter: formatterRank, align: 'center', sortable: true, visible: true },
   ]
   const datasetColumn = [
     { field: 'illegal-act', title: '非法活动', width: 140, align: 'center', sortable: true, visible: true },
@@ -284,75 +263,9 @@ import testCountData from "data/testCount.json";
 
       formatterRank: formatterRank,
 
-      formatterName({ cellValue }) {
-        const names = {
-          'wenxin2': '文心一言2.0',
-          'wenxin4': '文心一言4.0',
-          'GPT4': 'GPT-4',
-          'GPT35': 'GPT-3.5',
-          'mathgpt-0226': '九章大模型',
-          'spark': '讯飞星火V2.0',
-          'spark-3.5': '讯飞星火V3.5',
-          'internlm-chat-20B': 'Internlm-chat-20B',
-          'chatglm2-6B': 'Chatglm2-6B',
-          'moss-moon-003-base': 'Moss-moon-003-base',
-          'llemma_7B': 'Llemma-7B',
-          'llemma_34B': 'Llemma-34B',
-          'internlm2-math-20B': 'InternLM2-math-20B',
-          'internlm2-chat-20B': 'InternLM2-chat-20B',
-          'internlm2-base-20B': 'InternLM2-base-20B',
-          'deepseek-math-7b-rl': 'DeepSeekMath-RL-7B',
-          'deepseek-math-7b-instruct': 'DeepSeekMath-Instruct-7B',
-          'deepseek-math-7b-base': 'DeepSeekMath-Base-7B',
-        }
-        return names[cellValue] || cellValue;
-      },
-
       tableDataFilter(data) {
         const ignoreList = ['mathgpt-0206'];
         return data.filter(item => !ignoreList.includes(item.name));
-      },
-
-      // 更新能力平均值
-      // 在单应用题和算数的情况下，都是各自的整体平均
-      // 在其它情况下，是选定条件的(算数整体平均+应用题整体平均)/2
-      updateAbilityAverage() {
-        const columns = this.$refs.Table.getColumns();
-        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
-        // 能力维度:全部
-        if (this.abilityType === 'all') {
-          let arithmeticsAverage = 0;
-          let mathWorldProblemsAverage = 0;
-          const arithmeticsColumns = columns.filter(item => filterConfig.arithmetics.includes(item.field));
-          const mathWorldProblemsColumns = columns.filter(item => filterConfig.math_world_problems.includes(item.field));
-          // console.log('updateAbilityAverage', arithmeticsColumns, mathWorldProblemsColumns)
-          this.tableData.forEach((item) => {
-            let arithmeticsCount = 0;
-            let mathWorldProblemsCount = 0;
-            arithmeticsColumns.forEach((column) => {
-              arithmeticsCount += item[column.field] * 10000
-            })
-            mathWorldProblemsColumns.forEach((column) => {
-              mathWorldProblemsCount += item[column.field] * 10000
-            })
-            // console.log('updateAbilityAverage', arithmeticsCount, mathWorldProblemsCount)
-            if (arithmeticsCount && mathWorldProblemsCount) {
-              arithmeticsAverage = (Math.round(arithmeticsCount / arithmeticsColumns.length) / 10000).toFixed(4);
-              mathWorldProblemsAverage = (Math.round(mathWorldProblemsCount / mathWorldProblemsColumns.length) / 10000).toFixed(4);
-              item.ability_average = ((Number(arithmeticsAverage) + Number(mathWorldProblemsAverage)) / 2).toFixed(4);
-            } else {
-              item.ability_average = (Math.round((arithmeticsCount || mathWorldProblemsCount) / datasetColumns.length) / 10000).toFixed(4);
-            }
-          })
-        } else {
-          this.tableData.forEach((item) => {
-            let count = 0;
-            datasetColumns.forEach((column) => {
-              count += item[column.field] * 10000
-            })
-            item.ability_average = (Math.round(count / datasetColumns.length) / 10000).toFixed(4);
-          })
-        }
       },
 
       // 更新整体平均值
@@ -372,74 +285,11 @@ import testCountData from "data/testCount.json";
             item.overall_average = (Math.round(count / (datasetColumns.length - 4)) / 10000).toFixed(4);
           }
           // console.log(count);
-          // console.log(item.name, count / datasetColumns.length, Math.round(count / datasetColumns.length), (Math.round(count / datasetColumns.length) / 10000))
-          
-        })
-      },
-
-      // 更新加权平均值
-      // 选定数据集中的acc*数量/(数量和)
-      updateWeightedAverage() {
-        const columns = this.$refs.Table.getColumns();
-        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
-        this.tableData.forEach((item) => {
-          let weightedAverage = 0;
-          let averageCount = 0;
-          let testCount = 0;
-          datasetColumns.forEach((column) => {
-            averageCount += item[column.field] * testCountData[column.field];
-            testCount += testCountData[column.field];
-          })
-          weightedAverage = averageCount / testCount;
-          item.weighted_average = weightedAverage.toFixed(4);
-        })
-      },
-
-      // 更新累加排位
-      // 选定数据集，在所有模型内排序的位数，累加的和
-      updateCumulativeRanking() {
-        const columns = this.$refs.Table.getColumns();
-        const datasetColumns = columns.filter(item => this.datasetList.includes(item.field));
-        // 遍历所有模型
-        this.tableData.forEach((item) => {
-          // 当前模型的累加排位
-          let count = 0;
-          // 遍历所有数据集, 在所有模型中获取当前数据集的排位
-          datasetColumns.forEach((column) => {
-            // 将tableData数据按column数据集的值从大到小排序, 返回数组对象格式
-            const tableDataRanking = [...this.tableData].sort((a, b) => {
-              return b[column.field] - a[column.field];
-            })
-            // tableDataRanking数组中有相同值的排名, 将这个数组转换为对象, key为模型名称, value为排名, 相同的排名并列
-            const tableDataRankingMap = new Map();
-            tableDataRanking.forEach((tableDataItem) => {
-              if (tableDataRankingMap.has(tableDataItem[column.field])) {
-                tableDataRankingMap.get(tableDataItem[column.field]).push(tableDataItem.name);
-              } else {
-                tableDataRankingMap.set(tableDataItem[column.field], [tableDataItem.name]);
-              }
-            })
-            // 将tableDataRankingMap转换为map对象, key为value数组的模型名称, value为key的排序索引
-            const tableDataRankingMapIndex = new Map();
-            let indexCache = 1;
-            tableDataRankingMap.forEach((tableDataRankingMapItem) => {
-              tableDataRankingMapItem.forEach((tableDataRankingMapItemItem) => {
-                tableDataRankingMapIndex.set(tableDataRankingMapItemItem, indexCache);
-              })
-              indexCache++;
-            })
-            
-            count += tableDataRankingMapIndex.get(item.name);
-          })
-          // item.cumulative_ranking = count;
         })
       },
 
       updateTableData() {
-        this.updateAbilityAverage();
         this.updateOverallAverage();
-        this.updateWeightedAverage();
-        this.updateCumulativeRanking();
         this.$refs.Table.reloadData(this.tableData);
         this.$refs.Table.sort('ability_average', 'desc');
       },
