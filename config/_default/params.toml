@@ -42,7 +42,7 @@ link = "evaluation"
 # github
 [github]
 enable = true
-link = "https://github.com/math-eval"
+link = "https://github.com/NNStrings/SecurityEval"
 
 # search
 [search]

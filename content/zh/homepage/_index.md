@@ -11,7 +11,7 @@ banner:
   github:
     enable: true
     label: Github
-    link: https://github.com/math-eval
+    link: https://github.com/NNStrings/SecurityEval
 
 
 # Features
