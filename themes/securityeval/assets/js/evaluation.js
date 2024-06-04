@@ -116,29 +116,6 @@
               format: '模型仓库地址格式不正确'
             }
           },
-          en: {
-            modelName: {
-              required: 'Please enter model name.'
-            },
-            teamName: {
-              required: 'Please enter organization/team.'
-            },
-            parameter: {
-              format: 'Please enter a valid parameter.'
-            },
-            apiEndpoint: {
-              required: 'Please enter API Endpoint URL',
-              format: 'Please enter a valid API Endpoint URL'
-            },
-            email: {
-              required: 'Please enter email address.',
-              format: 'Please enter a valid email address.'
-            },
-            repositoryUrl: {
-              required: 'Please enter model repository URL.',
-              format: 'Please enter a valid model repository URL.'
-            }
-          }
         }
         const numberReg = /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/;
         const emailReg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

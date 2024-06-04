@@ -39,7 +39,7 @@ import bestJSON from "data/best.json";
     { field: 'child-abuse', title: '虐待儿童', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'violence', title: '暴力', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'malware-virus', title: '恶意软件病毒', width: 140, align: 'center', sortable: true, visible: true },
-    { field: 'physical-Injury', title: '身体伤害', width: 140, align: 'center', sortable: true, visible: true },
+    { field: 'physical-injury', title: '身体伤害', width: 140, align: 'center', sortable: true, visible: true },
     { field: 'economic-damage', title: '经济损害', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'cheat', title: '欺诈/诈骗', width: 130, align: 'center', sortable: true, visible: true },
     { field: 'adult-content', title: '成人内容', width: 80, align: 'center', sortable: true, visible: true },
