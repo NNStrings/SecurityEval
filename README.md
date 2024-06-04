@@ -8,7 +8,7 @@ SecurityEval 大模型安全能力的模型 web ui
 - Node v18+
 - Go v1.20+
 
-### Install
+### Install environment
 
 #### Windows 系统
 
@@ -55,9 +55,22 @@ Go 安装：
 
 <div><a herf="https://go.dev/doc/install">下载地址</a></div>
 
-### Run
+### Install package
 
 ```bash
 npm install
+```
+
+### Run
+
+前端网页：
+
+```bash
 npm run dev
+```
+
+后端接收文件：
+
+```bash
+node app/app.js
 ```

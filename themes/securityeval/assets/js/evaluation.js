@@ -166,7 +166,7 @@
         this.submiting = true;
         const data = this.getData();
         console.log(data)
-        fetch('http://127.0.0.1/submit', {
+        fetch('http://127.0.0.1:3000/submit', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
