@@ -4,9 +4,3 @@ languageName = "中"
 languageCode = "zh"
 contentDir = "content/zh"
 weight = 1
-
-[en]
-languageName = "EN"
-languageCode = "en-us"
-contentDir = "content/en"
-weight = 2

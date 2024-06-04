@@ -49,15 +49,6 @@
 - id: leaderboard_params
   translation: 参数量
 
-- id: leaderboard_average
-  translation: 综合评分
-
-- id: leaderboard_arithmetics
-  translation: 算术(平均分)
-
-- id: leaderboard_math_world_problems
-  translation: 应用题(平均分)
-
 - id: api_type_name
   translation: API提交
 
