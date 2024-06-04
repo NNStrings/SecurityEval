@@ -67,7 +67,7 @@ import bestJSON from "data/best.json";
         tableData: this.tableDataFilter(bestData),
         sortConfig: {
           defaultSort: {
-            field: 'ability_average',
+            field: 'overall_average',
             order: 'desc'
           },
           showIcon: false,
@@ -165,7 +165,6 @@ import bestJSON from "data/best.json";
       resetQuickColumn() {
         // 选择数据集速览, 只显示当前选择数据集的列
         if (this.quickViewType) {
-          // 不显示能力平均, 整体平均, 加权平均, 累加排位
           this.averageColumn.forEach(item => {
             this.visibleColumn(item.field, false)
           })
@@ -266,7 +265,7 @@ import bestJSON from "data/best.json";
       updateTableData() {
         this.updateOverallAverage();
         this.$refs.Table.reloadData(this.tableData);
-        this.$refs.Table.sort('ability_average', 'desc');
+        this.$refs.Table.sort('overall_average', 'asc');
       },
     }
   })
