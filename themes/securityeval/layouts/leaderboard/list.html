@@ -38,7 +38,6 @@
             <vxe-column type="seq" title=" " width="60" :fixed="fixedColumn" align="center"></vxe-column>
             <vxe-column field="name" title="{{ i18n "leaderboard_name" }}" width="180" :fixed="fixedColumn" :formatter="formatterName"></vxe-column>
             <vxe-column field="date" title="{{ i18n "leaderboard_date" }}" width="100" align="center"></vxe-column>
-            <!-- <vxe-column field="params" title="{{ i18n "leaderboard_params" }}" width="100" align="center"></vxe-column> -->
             <vxe-table-column v-for="(config, index) in averageColumn" :key="index" v-bind="config">
               <template v-slot:header="{ column }">
                 <div class="inline-block cursor-pointer select-none">
