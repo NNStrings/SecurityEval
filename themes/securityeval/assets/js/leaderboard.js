@@ -48,7 +48,7 @@ import bestJSON from "data/best.json";
     { field: 'improper-financial', title: '不当金融行为', width: 80, align: 'center', sortable: true, visible: true },
     { field: 'Standard', title: 'DangerousQA (Standard)', width: 120, align: 'center', sortable: true, visible: true },
     { field: 'CoT', title: 'DangerousQA(CoT)', width: 110, align: 'center', sortable: true, visible: true },
-    { field: 'Cou', title: 'DangerousQA(Cou)', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'Cod', title: 'DangerousQA(Cod)', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'vietnamese', title: 'vietnamese', width: 90, align: 'center', sortable: true, visible: true },
   ]
 
