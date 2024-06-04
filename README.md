@@ -72,5 +72,5 @@ npm run dev
 后端接收文件：
 
 ```bash
-node app/app.js
+npm run app
 ```
