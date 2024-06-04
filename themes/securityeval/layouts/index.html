@@ -28,36 +28,6 @@
         {{ end }}
       </div>
       {{ end }}
-      {{ with .Params.news }}
-      <div class="col-span-10 lg:col-span-4">
-        <div class="mt-6">
-          <div class="text-base mb-6 text-xl font-semibold text-center lg:text-left lg:text-lg">
-            {{ .title }}
-          </div>
-          {{ with site.GetPage "news" }}
-          <div>
-            <ul class="leading-8">
-              {{ $news := first 5 .Params.news }}
-              {{ range $news }}
-              <li>
-                <a href="{{ .link }}" class="block text-gray-500 hover:text-primary">
-                  <span class="mr-2">{{ .date }}</span>
-                  <span>{{ .title }}</span>
-                </a>
-              </li>
-              {{ end }}
-            </ul>
-          </div>
-          {{ end }}
-          <div class="flex mt-2">
-            <a href="{{ .link }}" class="block hover:underline hover:underline-offset-4 text-gray-500 hover:text-primary">
-              <span>{{ .more }}</span>
-              <span class="fa-solid fa-arrow-right"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-      {{ end }}
     </div>
   </div>
 </section>
