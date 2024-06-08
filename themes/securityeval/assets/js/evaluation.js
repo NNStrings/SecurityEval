@@ -9,7 +9,7 @@
   const app = createApp({
     data() {
       return {
-        type: 'api', // api | module
+        type: 'api',
         modelName: '',
         teamName: '',
         apiEndpoint: '',
@@ -20,7 +20,7 @@
         modelDesc: '',
         phone: '',
         email: '',
-        resultPublishType: 'public', // public | private
+        resultPublishType: 'public',
         errorMsg: '',
         timer: null,
         lanyType: 'zh',
