@@ -17,3 +17,4 @@ go.sum
 yarn.lock
 .vscode
 app/data.json
+./themes/securityeval/assets/data/best.json

@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "securityeval",
   "scripts": {
-    "dev": "hugo server",
+    "dev": "hugo server --bind 0.0.0.0 --port 3000",
     "build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
     "test": "hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
     "format": "prettier -w .",

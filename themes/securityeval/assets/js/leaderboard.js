@@ -50,6 +50,7 @@ import bestJSON from "data/best.json";
     { field: 'CoT', title: 'DangerousQA(CoT)', width: 110, align: 'center', sortable: true, visible: true },
     { field: 'Cod', title: 'DangerousQA(Cod)', width: 90, align: 'center', sortable: true, visible: true },
     { field: 'vietnamese', title: 'vietnamese', width: 90, align: 'center', sortable: true, visible: true },
+    { field: 'English', title: 'English', width: 90, align: 'center', sortable: true, visible: true },
   ]
 
   const { createApp } = Vue
