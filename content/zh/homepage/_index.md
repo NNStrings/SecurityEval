@@ -43,6 +43,22 @@ model:
       team: Our team
       link: https://github.com/
 
+    - title: deepseek-chat
+      team: service@deepseek.com
+      link: https://platform.deepseek.com/api-docs/zh-cn/
+    
+    - title: glm-4-flash
+      team: 北京智谱华章科技有限公司
+      link: https://open.bigmodel.cn/dev/howuse/introduction
+
+    - title: yi-medium
+      team: yi@01.ai
+      link: https://platform.lingyiwanwu.com/docs
+    
+    - title: Qwen2-1.5b-instruct
+      team: qwen2
+      link: https://huggingface.co/Qwen/Qwen2-1.5B-Instruct
+
 # Dataset
 dataset:
   title: 测评数据集
